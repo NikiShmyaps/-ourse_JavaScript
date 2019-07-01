@@ -4,12 +4,11 @@ let lang = prompt("Укажите значение 'ru' или 'en'");
 console.log('lang: ', lang);
 if (lang == "ru") {
     console.log("Понедельник, вторник, среда, четверг, пятница, суббота, воскресенье");
-}
-else if (lang == "en") {
+} else if (lang == "en") {
     console.log("Monday, tuesday, wednesday, thursday, friday, saturday, sunday");
 }
 
-switch (lang){
+switch (lang) {
     case "ru":
         console.log("Понедельник, вторник, среда, четверг, пятница, суббота, воскресенье");
         break;
@@ -28,4 +27,3 @@ console.log(result);
 let namePerson = prompt("Укажите 'Артем', 'Максим' или другое имя");
 let nameResult = namePerson == "Артем" ? "Директор" : namePerson == "Максим" ? "Преподователь" : "Студент";
 console.log(nameResult);
-

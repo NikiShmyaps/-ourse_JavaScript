@@ -1,27 +1,19 @@
 'use strict';
 
-let money = +prompt('Ваш месячный доход?');
-
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
-addExpenses.split(", ");
-
-let deposit = confirm('Есть ли у вас депозит в банке?');
-
-let income = confirm('Есть ли у вас дополнительный доход');
-
-let expensesOne = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
+let money = +prompt('Ваш месячный доход?'),
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:'),
+    deposit = confirm('Есть ли у вас депозит в банке?'),
+    income = confirm('Есть ли у вас дополнительный доход'),
+    expensesOne = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
     sumOne = +prompt('Во сколько это обойдется?'),
     expensesTwo = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
-    sumTwo = +prompt('Во сколько это обойдется?');
-
-let budgetMonth = money - sumOne + sumTwo;
-
-let mission = +prompt('Ваша цель?');
-
-let budgetDay = budgetMonth / 30;
+    sumTwo = +prompt('Во сколько это обойдется?'),
+    budgetMonth = money - sumOne + sumTwo,
+    mission = +prompt('Ваша цель?'),
+    budgetDay = budgetMonth / 30;
 
 console.log(typeof money);
-console.log(addExpenses);
+console.log(addExpenses.split(", "));
 console.log(typeof deposit);
 console.log(typeof income);
 console.log('budgetMonth: ', budgetMonth);

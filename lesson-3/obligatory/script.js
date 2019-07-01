@@ -8,7 +8,7 @@ let money = +prompt('Ваш месячный доход?'),
   sumOne = +prompt('Во сколько это обойдется?'),
   expensesTwo = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
   sumTwo = +prompt('Во сколько это обойдется?'),
-  budgetMonth = money - sumOne + sumTwo,
+  budgetMonth = money - (sumOne + sumTwo),
   mission = +prompt('Ваша цель?'),
   budgetDay = budgetMonth / 30;
 

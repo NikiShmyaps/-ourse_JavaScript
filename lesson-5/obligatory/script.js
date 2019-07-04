@@ -12,20 +12,25 @@ start();
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:'),
     deposit = confirm('Есть ли у вас депозит в банке?'),
     income = prompt('Есть ли у вас дополнительный доход'),
-    expensesOne = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Какието расходы'),
-    expensesTwo = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Какието расходы'),
-    sum = 0,
+    expensesOne,
+    expensesTwo,
     getExpensesMonth = function () {
+        let sum = 0;
         do {
             for (let i = 0; i < 2; i++) {
+                if (i === 0) {
+                    expensesOne = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Какие то расходы');
+                } else if (i === 1) {
+                    expensesTwo = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Какие то расходы');
+                }
                 sum += +prompt('Во сколько это обойдется', 5000);
             }
             return sum;
         }
         while (isNaN(money) || money == '' || money == null);
     };
-getExpensesMonth();
-let budgetMonth = money - getExpensesMonth(),
+let expensesAmount = getExpensesMonth();
+let budgetMonth = money - expensesAmount,
     mission = 65000,
     budgetDay = budgetMonth / 30,
 
@@ -34,7 +39,7 @@ let budgetMonth = money - getExpensesMonth(),
         return accumulatedMonth;
     },
     getTargetMonth = function (mission, getAccumulatedMonth) {
-        let finish = Math.floor(mission / getAccumulatedMonth(money, sum));
+        let finish = Math.floor(mission / getAccumulatedMonth(money, expensesAmount));
         if (finish < 0) {
             console.log("цель не будет достигнута");
         } else {
@@ -49,7 +54,7 @@ showTypeof(money);
 showTypeof(deposit);
 showTypeof(income);
 
-console.log('getAccumulatedMonth(): ', getAccumulatedMonth(money, sum));
+console.log('getAccumulatedMonth(): ', getAccumulatedMonth(money, expensesAmount));
 console.log('getTargetMonth(): ', getTargetMonth(mission, getAccumulatedMonth));
 
 function getStatusIncome() {

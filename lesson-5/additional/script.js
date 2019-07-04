@@ -1,20 +1,5 @@
-let additional = function (arg) {
-        let string = arg.trim(),
-            stringTwo = string.slice(0, 30),
-            stringThree = stringTwo.concat("...");
-        if (string.length > 30) {
-            alert(stringThree + " строка без пробелов и на 30 символов");
-        } else {
-            alert(string + " строка без пробелов");
-        }
-    },
-    checkPrompt = function (callback) {
-        let data = prompt('Введите значение');
-        if (Number.isNaN(Number(data))) {
-            callback(data);
-        } else {
-            alert(data + " не является строкой");
-            checkPrompt(additional);
-        }
-    };
-checkPrompt(additional);
+// Вывести в консоль только те, что начинаются с цифры 2 или 4 (Должны присутствовать в массиве)
+let arr = [11, 22, 33, 44, 55, 66, 77];
+for (let i = 0; i < arr.length; i++) {
+
+}

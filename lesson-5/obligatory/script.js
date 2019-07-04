@@ -25,9 +25,9 @@ let addExpenses = prompt('Перечислите возможные расход
         while (isNaN(money) || money == '' || money == null);
     };
 getExpensesMonth();
-// budgetMonth = money - (sumOne + sumTwo),
-let mission = 65000,
-    // budgetDay = budgetMonth / 30,
+let budgetMonth = money - getExpensesMonth(),
+    mission = 65000,
+    budgetDay = budgetMonth / 30,
 
     getAccumulatedMonth = function (money, sum) {
         let accumulatedMonth = money - sum;
@@ -42,13 +42,9 @@ let mission = 65000,
             return finish;
         }
     },
-
-
-
     showTypeof = function (item) {
         console.log(item, typeof item);
     };
-
 showTypeof(money);
 showTypeof(deposit);
 showTypeof(income);
@@ -56,15 +52,15 @@ showTypeof(income);
 console.log('getAccumulatedMonth(): ', getAccumulatedMonth(money, sum));
 console.log('getTargetMonth(): ', getTargetMonth(mission, getAccumulatedMonth));
 
-// function getStatusIncome() {
-//     if (budgetDay >= 800) {
-//         return ("Высокий уровень дохода");
-//     } else if (300 <= budgetDay && budgetDay < 800) {
-//         return ("Средний уровень дохода");
-//     } else if (0 <= budgetDay && budgetDay < 300) {
-//         return ("Низкий уровень дохода");
-//     } else if (budgetDay < 0) {
-//         return ("Что то пошло не так");
-//     }
-// }
-// console.log('getStatusIncome(): ', getStatusIncome());
+function getStatusIncome() {
+    if (budgetDay >= 800) {
+        return ("Высокий уровень дохода");
+    } else if (300 <= budgetDay && budgetDay < 800) {
+        return ("Средний уровень дохода");
+    } else if (0 <= budgetDay && budgetDay < 300) {
+        return ("Низкий уровень дохода");
+    } else if (budgetDay < 0) {
+        return ("Что то пошло не так");
+    }
+}
+console.log('getStatusIncome(): ', getStatusIncome());

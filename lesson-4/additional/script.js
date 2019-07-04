@@ -11,9 +11,10 @@ let additional = function (arg) {
     checkPrompt = function (callback) {
         let data = prompt('Введите значение');
         if (Number.isNaN(Number(data))) {
-            alert(data + " не является строкой");
+
             callback(data);
         } else {
+            alert(data + " не является строкой");
             checkPrompt(additional);
         }
     };

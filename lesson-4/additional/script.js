@@ -1,31 +1,17 @@
-// let data = prompt('Введите значение'),
-//     additional = function (arg) {
-//         alert(arg + 'Введенное значение не является строкой');
-//         // while (typeof argument !== 'string') {
-//         //     if (Number.isNaN(Number(arg))) {
-//         //         alert('Введенное значение является строкой');
-//         //     } else {
-//         //         alert('Введенное значение не является строкой');
-//         //     }
-//         // }
-
-
-//     },
-//     checkPrompt = function (callback){
-//         let data
-//     };
-// additional(data);
-
 let additional = function (arg) {
         let string = arg.trim(),
             stringTwo = string.slice(0, 30),
             stringThree = stringTwo.concat("...");
-        alert(string + " строка без пробелов" + "\n" + stringThree + " строка на 30 символов");
-
+        if (string.length > 30) {
+            alert(stringThree + " строка без пробелов и на 30 символов");
+        } else {
+            alert(string + " строка без пробелов");
+        }
     },
     checkPrompt = function (callback) {
         let data = prompt('Введите значение');
         if (Number.isNaN(Number(data))) {
+            alert(data + " не является строкой");
             callback(data);
         } else {
             checkPrompt(additional);

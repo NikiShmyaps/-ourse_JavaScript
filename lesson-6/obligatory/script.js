@@ -38,17 +38,17 @@ let appData = {
         budgetDay: 0,
         budgetMonth: 0,
         expensesMonth: 0,
-        //         Метод getExpensesMonth будет считать сумму всех обязательных расходов и сохранять результат в свойство expensesMonth 
-        // для того, чтобы посчитать сумму используйте цикл for in
         getExpensesMonth: function () {
-
+            for (let key in appData.expenses) {
+                appData.expensesMonth = appData.expenses[key] + appData.expenses[key];
+            }
         },
-        getAccumulatedMonth: function (budget, sum) {
-            let accumulatedMonth = budget - sum;
-            return accumulatedMonth;
+        getBudget: function (budget, sum) {
+            appData.budgetMonth = budget - sum;
+            appData.budgetDay = appData.budgetMonth / 30;
         },
-        getTargetMonth: function (mission, getAccumulatedMonth) {
-            let finish = Math.floor(mission / getAccumulatedMonth);
+        getTargetMonth: function (mission, budgetMonth) {
+            let finish = Math.floor(mission / budgetMonth);
             if (finish < 0) {
                 console.log("цель не будет достигнута");
             } else {
@@ -66,41 +66,25 @@ let appData = {
             } else if (appData.budgetDay < 0) {
                 return ("Что то пошло не так");
             }
+        },
+        own: function () {
+            for (let key in appData) {
+                console.log("Наша программа включает в себя данные: " + key);
+            }
         }
     },
 
     income = prompt('Есть ли у вас дополнительный доход');
+
 appData.asking();
 
-let expensesAmount = appData.getExpensesMonth();
-console.log('expensesAmount: ', expensesAmount);
+appData.getExpensesMonth();
+console.log('expensesMonth: ', appData.expensesMonth);
 
-console.log('getAccumulatedMonth: ', appData.getAccumulatedMonth(appData.budget, expensesAmount));
+appData.getBudget(appData.budget, appData.expensesMonth);
 
-let accumulatedMonth = appData.getAccumulatedMonth(appData.budget, expensesAmount);
-console.log('getTargetMonth: ', appData.getTargetMonth(appData.mission, accumulatedMonth));
+console.log('getTargetMonth: ', appData.getTargetMonth(appData.mission, appData.budgetMonth));
 
+console.log('getStatusIncome(): ', appData.getStatusIncome());
 
-console.log('appData.getStatusIncome(): ', appData.getStatusIncome());
-console.log('expenses: ', appData.expenses);
-//     expensesOne,
-//     expensesTwo,
-
-//     let expensesAmount = getExpensesMonth();
-// let budgetMonth = money - expensesAmount,
-//     budgetDay = budgetMonth / 30,
-
-
-
-//     showTypeof = function (item) {
-//         console.log(item, typeof item);
-//     };
-// showTypeof(money);
-// showTypeof(appData.deposit);
-// showTypeof(appData.income);
-
-//     console.log('getAccumulatedMonth(): ', getAccumulatedMonth(money, expensesAmount));
-// console.log('getTargetMonth(): ', getTargetMonth(appData.mission, getAccumulatedMonth));
-
-
-// console.log('getStatusIncome(): ', getStatusIncome());
+appData.own();

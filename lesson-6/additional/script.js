@@ -5,10 +5,10 @@ let dayWeek = date.getDay();
 for (let i = 0; i < week.length; i++) {
     if (i == 0) {
         document.write(week[i].italics() + "<br>");
-    } else if (i == 6) {
-        document.write(week[i].italics() + "<br>");
     } else if (i == dayWeek) {
         document.write(week[i].bold() + "<br>");
+    } else if (i == 6) {
+        document.write(week[i].italics() + "<br>");
     } else {
         document.write(week[i] + "<br>");
     }

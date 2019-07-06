@@ -19,20 +19,23 @@ let appData = {
         mission: 65000,
         period: 3,
         asking: function () {
-            let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:'),
-                sum = 0,
-                any, expensesTwo;
+            let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
             appData.addExpenses = addExpenses.toLowerCase().split(',');
             appData.deposit = confirm('Есть ли у вас депозит в банке?');
-            do {
-                for (let i = 0; i < 2; i++) {
-                    any = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Какие то расходы');
-                    expensesTwo = +prompt('Во сколько это обойдется', 5000);
-                    sum += expensesTwo;
-                    appData.expenses[any] = expensesTwo;
+            for (let i = 0; i < 2; i++) {
+                let itemExpenses, cashExpenses;
+                do {
+                    itemExpenses = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Какие то расходы');
                 }
+                while (Number(itemExpenses) || itemExpenses === '' || itemExpenses === null);
+
+                do {
+                    cashExpenses = +prompt('Во сколько это обойдется', 5000);
+                }
+                while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
+
+                appData.expenses[itemExpenses] = cashExpenses;
             }
-            while (isNaN(appData.budget) || appData.budget == '' || appData.budget == null);
         },
         budget: money,
         budgetDay: 0,
@@ -40,7 +43,7 @@ let appData = {
         expensesMonth: 0,
         getExpensesMonth: function () {
             for (let key in appData.expenses) {
-                appData.expensesMonth = appData.expenses[key] + appData.expenses[key];
+                appData.expensesMonth += appData.expenses[key];
             }
         },
         getBudget: function (budget, sum) {
@@ -83,8 +86,9 @@ console.log('expensesMonth: ', appData.expensesMonth);
 
 appData.getBudget(appData.budget, appData.expensesMonth);
 
-console.log('getTargetMonth: ', appData.getTargetMonth(appData.mission, appData.budgetMonth));
+console.log('Через: ', appData.getTargetMonth(appData.mission, appData.budgetMonth) + ' месяца');
 
 console.log('getStatusIncome(): ', appData.getStatusIncome());
 
 appData.own();
+console.log('appData.expenses: ', appData.expenses);

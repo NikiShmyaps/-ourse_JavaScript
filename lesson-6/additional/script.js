@@ -1,5 +1,5 @@
 let week = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
-    date = new Date(2019, 6, 6),
+    date = new Date(2019, 6, 8),
     dayWeek = date.getDay();
 // document.write("Сегодня " + week[dayWeek] + "<br>");
 for (let i = 0; i < week.length; i++) {
@@ -11,3 +11,7 @@ for (let i = 0; i < week.length; i++) {
         document.write(week[i].italics() + "<br>");
     }
 }
+
+// let week = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+//     date = new Date(2019, 6, 6),
+//     dayWeek = date.getDay();

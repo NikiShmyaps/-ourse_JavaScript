@@ -34,7 +34,12 @@ let appData = {
             appData.addIncome = itemIncome;
             appData.income[itemIncome] = cashIncome;
         }
-        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
+        let addExpenses;
+        do {
+            addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
+
+        }
+        while (Number(addExpenses) || addExpenses === '' || addExpenses === null);
         appData.addExpenses = addExpenses.split(',');
         appData.addExpenses = appData.addExpenses.map(str => str.trim());
         appData.deposit = confirm('Есть ли у вас депозит в банке?');

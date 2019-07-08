@@ -34,9 +34,9 @@ let appData = {
             appData.addIncome = itemIncome;
             appData.income[itemIncome] = cashIncome;
         }
-
         let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
         appData.addExpenses = addExpenses.split(',');
+        appData.addExpenses = appData.addExpenses.map(str => str.trim());
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         for (let i = 0; i < 2; i++) {
             let itemExpenses, cashExpenses;
@@ -111,15 +111,15 @@ let appData = {
         let arr = [],
             subResult;
         for (let key in appData.expenses) {
-            subResult = key.charAt(0).toUpperCase() + key.slice(1);
+            subResult = " " + key.charAt(0).toUpperCase() + key.slice(1);
             arr.push(subResult);
         }
         for (let key in appData.income) {
-            subResult = key.charAt(0).toUpperCase() + key.slice(1);
+            subResult = " " + key.charAt(0).toUpperCase() + key.slice(1);
             arr.push(subResult);
         }
         for (let key in appData.addExpenses) {
-            subResult = appData.addExpenses[key].charAt(0).toUpperCase() + appData.addExpenses[key].slice(1);
+            subResult = " " + appData.addExpenses[key].charAt(0).toUpperCase() + appData.addExpenses[key].slice(1);
             arr.push(subResult);
         }
         return arr;

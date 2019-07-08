@@ -4,7 +4,6 @@ let money,
     start = function () {
         do {
             money = +prompt('Ваш месячный доход?');
-            return money;
         }
         while (isNaN(money) || money == '' || money == null);
     };
@@ -53,7 +52,7 @@ let appData = {
             do {
                 cashExpenses = +prompt('Во сколько это обойдется', 5000);
             }
-            while (isNaN(cashExpenses) || cashExpenses === '' || cashExpenses === null);
+            while (isNaN(cashExpenses) || cashExpenses == '' || cashExpenses === null);
 
             appData.expenses[itemExpenses] = cashExpenses;
         }

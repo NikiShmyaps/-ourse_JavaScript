@@ -1,0 +1,22 @@
+let button = document.querySelector('#start'),
+    buttonIncom = document.querySelector('.income_add'),
+    buttonExpenses = document.querySelector('.expenses_add'),
+    checkBox = document.querySelector('#deposit-check'),
+    additionalIncomTitle = document.querySelectorAll('.additional_income-item'),
+
+    salaryAmount = document.querySelector('.salary-amount'),
+    incomeTitle = document.querySelector('.income-title'),
+    incomeAmount = document.querySelector('.income-amount'),
+    expensesTitle = document.querySelector('.expenses-title'),
+    additionalExpensesTitle = document.querySelector('.additional_expenses-item'),
+    targetAmount = document.querySelector('.target-amount'),
+    periodSelect = document.querySelector('.period-select'),
+
+    budgetDay = document.querySelector('.budget_day-value'),
+    budgetMonth = document.querySelector('.budget_month-value'),
+    expensesMonth = document.querySelector('.expenses_month-value'),
+    accumulatedMonth = document.querySelector('.accumulated_month-value'),
+    additionalIncome = document.querySelector('.additional_income-value'),
+    additionalExpenses = document.querySelector('.additional_expenses-value'),
+    incomPeriod = document.querySelector('.income_period-value'),
+    targetMonth = document.querySelector('.target_month-value');

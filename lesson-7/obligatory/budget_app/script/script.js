@@ -1,6 +1,6 @@
 let button = document.querySelector('#start'),
-    buttonIncom = document.querySelector('.income_add'),
-    buttonExpenses = document.querySelector('.expenses_add'),
+    buttonIncom = (document.getElementsByTagName('button')[0]),
+    buttonExpenses = (document.getElementsByTagName('button')[1]),
     checkBox = document.querySelector('#deposit-check'),
     additionalIncomTitle = document.querySelectorAll('.additional_income-item'),
 

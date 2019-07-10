@@ -5,7 +5,9 @@ let dataTime = new Date(),
     d = dataTime.getDay(),
     date = dataTime.getDate(),
     year = dataTime.getFullYear(),
-    month = (dataTime.getMonth() + 1);
+    month = (dataTime.getMonth() + 1),
+    element = document.querySelector('.element'),
+    newElem = document.createElement('p');
 
 
 function showData(dataTime) {
@@ -31,6 +33,8 @@ function showData(dataTime) {
     if (month.length < 2) {
         month = "0" + month;
     }
-    console.log(hours + ":" + minutes + ":" + seconds + " " + date + "." + month + "." + year);
+    // console.log(hours + ":" + minutes + ":" + seconds + " " + date + "." + month + "." + year);
+    newElem.innerHTML = hours + ":" + minutes + ":" + seconds + " " + date + "." + month + "." + year;
+    element.appendChild(newElem);
 }
 showData(dataTime);

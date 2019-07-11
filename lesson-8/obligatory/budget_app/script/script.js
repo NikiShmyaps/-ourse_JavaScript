@@ -63,7 +63,6 @@ let start = document.getElementById('start'),
             budgetMonthValue.value = appData.budgetMonth;
             budgetDayValue.value = Math.ceil(appData.budgetDay);
             expensesMonthValue.value = appData.expensesMonth;
-            accumulatedMonthValue.value = appData.incomeMonth;
             additionalExpensesValue.value = appData.addExpenses.join(', ');
             additionalIncomeValue.value = appData.addIncome.join(', ');
             targetMonthValue.value = Math.ceil(appData.getTargetMonth());

@@ -169,16 +169,14 @@ let start = document.getElementById('start'),
                 expensesItems = document.querySelectorAll('.expenses-items');
             if (incomeItems.length === 2) {
                 incomeItems[0].parentNode.removeChild(incomeItems[1]);
-            }
-            if (incomeItems.length === 3) {
+            } else if (incomeItems.length === 3) {
                 incomeItems[0].parentNode.removeChild(incomeItems[1]);
                 incomeItems[0].parentNode.removeChild(incomeItems[2]);
             }
 
             if (expensesItems.length === 2) {
                 expensesItems[0].parentNode.removeChild(expensesItems[1]);
-            }
-            if (expensesItems.length === 3) {
+            } else if (expensesItems.length === 3) {
                 expensesItems[0].parentNode.removeChild(expensesItems[1]);
                 expensesItems[0].parentNode.removeChild(expensesItems[2]);
             }

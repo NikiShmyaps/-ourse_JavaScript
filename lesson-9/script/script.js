@@ -167,10 +167,25 @@ let start = document.getElementById('start'),
         getReset: function () {
             let incomeItems = document.querySelectorAll('.income-items'),
                 expensesItems = document.querySelectorAll('.expenses-items');
-            incomeItems[0].parentNode.removeChild(incomeItems[1]);
-            incomeItems[0].parentNode.removeChild(incomeItems[2]);
-            expensesItems[0].parentNode.removeChild(expensesItems[1]);
-            expensesItems[0].parentNode.removeChild(expensesItems[2]);
+            if (incomeItems.length === 2) {
+                incomeItems[0].parentNode.removeChild(incomeItems[1]);
+            }
+            if (incomeItems.length === 3) {
+                incomeItems[0].parentNode.removeChild(incomeItems[1]);
+                incomeItems[0].parentNode.removeChild(incomeItems[2]);
+            }
+
+            if (expensesItems.length === 2) {
+                expensesItems[0].parentNode.removeChild(expensesItems[1]);
+            }
+            if (expensesItems.length === 3) {
+                expensesItems[0].parentNode.removeChild(expensesItems[1]);
+                expensesItems[0].parentNode.removeChild(expensesItems[2]);
+            }
+            // incomeItems[0].parentNode.removeChild(incomeItems[1]);
+            // incomeItems[0].parentNode.removeChild(incomeItems[2]);
+            // expensesItems[0].parentNode.removeChild(expensesItems[1]);
+            // expensesItems[0].parentNode.removeChild(expensesItems[2]);
 
             let allLeft = document.querySelectorAll('.data input[type=text]'),
                 allRight = document.querySelectorAll('.result input[type=text]');

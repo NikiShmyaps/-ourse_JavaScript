@@ -51,7 +51,7 @@ class AppData {
         this.budget = +salaryAmount.value;
         this.getDis();
         this.getItem(expensesItems, 'expenses', this.expenses);
-        this.getItems(incomeItems, 'income', this.income);
+        this.getItem(incomeItems, 'income', this.income);
             
         this.getInfoDeposit();
         this.getBudget();
@@ -83,50 +83,16 @@ class AppData {
             btn.style.display = 'none';
         }
     }
-    /* addExpensesBlock () {
-        let cloneExpensesItem = expensesItems[0].cloneNode(true);
-        expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
-        expensesItems = document.querySelectorAll('.expenses-items');
-        if (expensesItems.length === 3) {
-            expensesPlus.style.display = 'none';
-        }
-    }
-    addIncomeBlock () {
-        let cloneIncomeItem = incomeItems[0].cloneNode(true);
-        incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
-        incomeItems = document.querySelectorAll('.income-items');
-        if (incomeItems.length === 3) {
-            incomePlus.style.display = 'none';
-        }
-    }*/
     getItem(myItem, myElem, myObj) {
+        myItem = document.querySelectorAll(`.${myElem}-items`);
         myItem.forEach((item) => {
-            let itemTitle = item.querySelector(`.${myElem}-title`).value,
-                itemAmount = item.querySelector(`.${myElem}-amount`).value;
+            const itemTitle = item.querySelector(`.${myElem}-title`).value;
+            const itemAmount = item.querySelector(`.${myElem}-amount`).value;
             if(itemTitle !== '' && itemAmount !== ''){
-                myObj[itemTitle] = itemAmount;
+                myObj[itemTitle.charAt(0).toUpperCase() + itemTitle.substring(1).toLowerCase()] = itemAmount;
             }
         });
     }
-//    getExpenses () {
-//         expensesItems.forEach((item) => {
-//             let itemExpenses = item.querySelector('.expenses-title').value;
-//             let cashExpenses = item.querySelector('.expenses-amount').value;
-//             if (itemExpenses !== '' && cashExpenses !== '') {
-//                 this.expenses[itemExpenses] = cashExpenses;
-//             }
-//         });
-//     }
-//     getIncome () {
-//         incomeItems.forEach((item) => {
-//             let itemIncome = item.querySelector('.income-title').value;
-//                 let cashIncome = item.querySelector('.income-amount').value;
-//                 if (itemIncome !== '' && cashIncome !== '') {
-//                     this.income[itemIncome] = cashIncome;
-//                 }
-//             });
-//     }
-
     getAddExpenses () {
         let addExpenses = additionalExpensesItem.value.split(',');
         addExpenses.forEach((item) => {
@@ -262,8 +228,12 @@ class AppData {
         start.addEventListener('click', this.start.bind(this));
         salaryAmount.addEventListener('keyup', this.prohibition);
         cancel.addEventListener('click', this.getReset.bind(this));
-        expensesPlus.addEventListener('click', this.addItemBlock(expensesItems, 'expenses', expensesPlus));
-        incomePlus.addEventListener('click', this.addItemBlock(incomeItems, 'income', incomePlus));
+        expensesPlus.addEventListener('click', () => {
+            this.addItemBlock(expensesItems, 'expenses', expensesPlus);
+        });
+        incomePlus.addEventListener('click', () =>{
+            this.addItemBlock(incomeItems, 'income', incomePlus);
+        });
         periodSelect.setAttribute('oninput', "this.getPeriod()");
         periodSelect.addEventListener('click', this.calcPeriod);
         depositCheck.addEventListener('change', this.depositCheck);

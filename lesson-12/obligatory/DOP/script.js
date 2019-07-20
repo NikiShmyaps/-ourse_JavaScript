@@ -48,6 +48,8 @@ function time(){
     creatBlock(newText);
 }
 
+
+
 function newYear(){
     let deadline = new Date('1 Jan 2020'),
         days = Math.floor((deadline.getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000)),

@@ -86,8 +86,8 @@ class AppData {
     getItem(myItem, myElem, myObj) {
         myItem = document.querySelectorAll(`.${myElem}-items`);
         myItem.forEach((item) => {
-            const itemTitle = item.querySelector(`.${myElem}-title`).value;
-            const itemAmount = item.querySelector(`.${myElem}-amount`).value;
+            const itemTitle = item.querySelector(`.${myElem}-title`).value,
+                itemAmount = item.querySelector(`.${myElem}-amount`).value;
             if(itemTitle !== '' && itemAmount !== ''){
                 myObj[itemTitle.charAt(0).toUpperCase() + itemTitle.substring(1).toLowerCase()] = itemAmount;
             }

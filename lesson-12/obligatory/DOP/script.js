@@ -7,6 +7,9 @@ let hello = document.querySelector('#hello'),
     timerSeconds = document.querySelector('#seconds'),
     ampm = document.querySelector('#ampm'),
     days = document.querySelector('#days'),
+    timer = document.querySelector('#timer'),
+    
+    newItem = document.createElement('span'),
 
     year = new Date().getFullYear(),
     month = new Date().getMonth(),
@@ -27,46 +30,54 @@ function getWelcom(){
         timesDay = 'Добрый день';
     }
 
-    hello.textContent = timesDay;
+    newItem.innerHTML = timesDay;
+    timer.appendChild(newItem);
 }
 
 function presentlyText(){
-    presently.textContent = week[date];
+    newItem.innerHTML = week[date];
+    timer.appendChild(newItem);
 }
 
 function time(){
     if(hours.toString().length < 2){
-        timerHours.textContent = '0' + (hours % 12);
+        newItem.innerHTML = '0' + (hours % 12);
+        timer.appendChild(newItem);
     }else{
-        timerHours.textContent = hours % 12;
+        newItem.innerHTML = hours % 12;
+        timer.appendChild(newItem);
     }
     if(minutes.toString().length < 2){
-        timerMinutes.textContent = '0' + minutes;
+        newItem.innerHTML = '0' + minutes;
+        timer.appendChild(newItem);
     }else{
-        timerMinutes.textContent = minutes;
+        newItem.innerHTML = minutes;
+        timer.appendChild(newItem);
     }
     if(seconds.toString().length < 2){
-        timerSeconds.textContent = '0' + seconds;
+        newItem.innerHTML = '0' + seconds;
+        timer.appendChild(newItem);
     }else{
-        timerSeconds.textContent = seconds;
+        newItem.innerHTML = seconds;
+        timer.appendChild(newItem);
     }
 
     if(hours >= 12){
-        ampm.textContent = 'AM';
+        newItem.innerHTML = 'AM';
+        timer.appendChild(newItem);
     }else{
-        ampm.textContent = 'PM';
+        newItem.innerHTML = 'PM';
+        timer.appendChild(newItem);
     }
 }
 
 function newYear(deadline){
     let dateLast = new Date(deadline).getTime(),
         dayOfNY = Math.floor((dateLast - new Date().getTime()) / (24 * 60 * 60 * 1000));
-    days.textContent = dayOfNY;
+    newItem.innerHTML = dayOfNY;
+    timer.appendChild(newItem);
 }
 
-function start(){
-    
-}
 
 setInterval(() => {
     getWelcom();

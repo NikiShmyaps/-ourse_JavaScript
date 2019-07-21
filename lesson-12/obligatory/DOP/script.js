@@ -1,87 +1,56 @@
 'use strict';
 
-let hello = document.querySelector('#hello'),
-    presently = document.querySelector('#presently'),
-    timerHours = document.querySelector('#hours'),
-    timerMinutes = document.querySelector('#minutes'),
-    timerSeconds = document.querySelector('#seconds'),
-    ampm = document.querySelector('#ampm'),
-    days = document.querySelector('#days'),
-    timer = document.querySelector('#timer'),
-    
-    newItem = document.createElement('span'),
+const block = document.createElement('p');
+let blockTime = block.cloneNode(true),
+    blockWeek = block.cloneNode(true),
+    blockYear = block.cloneNode(true),
+    week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
-    year = new Date().getFullYear(),
-    month = new Date().getMonth(),
-    date = new Date().getDay(),
-    hours = new Date().getHours(),
-    minutes = new Date().getMinutes(),
-    seconds = new Date().getSeconds(),
-    week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-    timesDay = '';
-
-
-function getWelcom(){
-    if(hours < 12){
-        timesDay = 'Доброе утро';
-    }else if(hours < 6 || hours > 20){
-        timesDay = 'Доброй ночи';
+function getWelcome(){
+    let hours = new Date().getHours(),
+        timesDay;
+    if(hours < 6 || hours > 20){
+        timesDay = 'Доброе ночи';
+    }else if(hours < 12){
+        timesDay = 'Доброй утро';
     }else{
         timesDay = 'Добрый день';
     }
-
-    newItem.innerHTML = timesDay;
-    timer.appendChild(newItem);
+    block.innerHTML = timesDay;
+    document.body.appendChild(block);
 }
 
 function presentlyText(){
-    newItem.innerHTML = week[date];
-    timer.appendChild(newItem);
+    let date = new Date().getDay();
+    blockWeek.innerHTML = `Сегодня: ${week[date]}`;
+    document.body.appendChild(blockWeek);
 }
 
-function time(){
-    if(hours.toString().length < 2){
-        newItem.innerHTML = '0' + (hours % 12);
-        timer.appendChild(newItem);
-    }else{
-        newItem.innerHTML = hours % 12;
-        timer.appendChild(newItem);
-    }
-    if(minutes.toString().length < 2){
-        newItem.innerHTML = '0' + minutes;
-        timer.appendChild(newItem);
-    }else{
-        newItem.innerHTML = minutes;
-        timer.appendChild(newItem);
-    }
-    if(seconds.toString().length < 2){
-        newItem.innerHTML = '0' + seconds;
-        timer.appendChild(newItem);
-    }else{
-        newItem.innerHTML = seconds;
-        timer.appendChild(newItem);
-    }
-
-    if(hours >= 12){
-        newItem.innerHTML = 'AM';
-        timer.appendChild(newItem);
-    }else{
-        newItem.innerHTML = 'PM';
-        timer.appendChild(newItem);
-    }
+function updateTime(){
+    let myDate = new Date(),
+        myTime = myDate.toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        }),
+        strDate = `Текущее время: ${myTime}`;
+    blockTime.innerHTML = strDate;
+    document.body.appendChild(blockTime);
 }
 
-function newYear(deadline){
-    let dateLast = new Date(deadline).getTime(),
+function newYear(){
+    let dateLast = new Date('1 jan 2020').getTime(),
         dayOfNY = Math.floor((dateLast - new Date().getTime()) / (24 * 60 * 60 * 1000));
-    newItem.innerHTML = dayOfNY;
-    timer.appendChild(newItem);
+    blockYear.innerHTML = `До нового года осталось ${dayOfNY} дней`;
+    document.body.appendChild(blockYear);
 }
 
-
-setInterval(() => {
-    getWelcom();
+setInterval(() =>{
+    getWelcome();
     presentlyText();
-    time();
-    newYear('1 Jan 2020');
-}, 1000);
+    updateTime();
+    newYear();
+},1000);
+
+

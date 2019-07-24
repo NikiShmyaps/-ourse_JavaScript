@@ -66,22 +66,28 @@ window.addEventListener('DOMContentLoaded', function(){
 
         body.addEventListener('click', (event) => {
             let target = event.target;
-            // if(target.closest('body')){
-            //     menu.classList.remove('active-menu'); 
-            //     return;
-            // }
-            if(target.classList.contains('close-btn')){
-                handlerMenu();
-                return;
-            }else if(target.closest('ul>li')){
-                handlerMenu();
-                return;
-            }else if(target.classList.contains('active-menu')){
-                return;
-            }else{
+            
+            if(target && target.classList.contains('menu')){
                 handlerMenu();
                 return;
             }
+            if (target && target.classList.contains('close-btn')){
+                handlerMenu();
+                return;
+            }else if(target && target.closest('menu>ul>li')){
+                handlerMenu();
+                return;
+            }else if(target && target.classList.contains('active-menu')){
+                return;
+            }
+            target = target.closest('.menu');
+
+            if(target && target.classList.contains('menu')){
+                handlerMenu();
+                return;
+            }
+            menu.classList.remove('active-menu');
+            return;
             
           });
 

@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', function(){
     countTimer('21 july 2019');
 
     // menu 
-    const toggleMenu = () =>{ 
+    const toggleMenu = () =>{
         const btnMenu = document.querySelector('.menu'), 
             menu = document.querySelector('menu');
         
@@ -65,25 +65,22 @@ window.addEventListener('DOMContentLoaded', function(){
 
         menu.addEventListener('click', (event) => {
             let target = event.target;
-
             
             if(target.classList.contains('close-btn')){
                 handlerMenu();
-            }else{
-                target = target.closest('ul>li');
+                return;
+            }else if(target.closest('ul>li')){
                 handlerMenu();
+                return;
+            }else if(target.classList.contains('active-menu')){
+                return;
+            }else{
+                handlerMenu();
+                return;
             }
 
-            // else if(target.classList.contains('active-menu')){
-            //     handlerMenu();
-            // }
-
-            // else if(target.tagName !=='MENU'){
-            //     handlerMenu();
-            // }
-
             // if(!target){
-            //     menu.classList.toggle('active-menu');
+            //     handlerMenu();
             // }
         });
     }; 

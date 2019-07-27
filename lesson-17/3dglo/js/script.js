@@ -381,7 +381,7 @@ window.addEventListener('DOMContentLoaded', function(){
         console.log('inputs: ', inputs);
         inputs.forEach((key) => {
             console.log('key: ', key);
-            
+            key.value = '';
         });
     };
 
@@ -409,7 +409,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 body[key] = val;
             }); 
             postData(body, () => {
-                inputReset(body);
+                form.querySelectorAll('input').forEach( item => item.value ='');
                 statusMessage.textContent = successMessage;
 
             }, (error) => {
@@ -431,6 +431,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 body[key] = val;
             }); 
             postData(body, () => {
+                formFooter.querySelectorAll('input').forEach( item => item.value ='');
                 statusMessage.textContent = successMessage;
             }, (error) => {
                 statusMessage.textContent = errorMessage;
@@ -450,6 +451,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 body[key] = val;
             }); 
             postData(body, () => {
+                formPopUp.querySelectorAll('input').forEach( item => item.value ='');
                 statusMessage.textContent = successMessage;
 
             }, (error) => {

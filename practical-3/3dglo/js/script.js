@@ -278,9 +278,15 @@ window.addEventListener('DOMContentLoaded', function(){
         let inputItems = document.querySelectorAll('.calc-item');
         
         inputItems.forEach((elem) => {
-            elem.addEventListener('input', (item) => {
-                item.target.value = item.target.value.replace(/\D/g, '');
-            });
+            if(elem.matches('select')){
+                return;
+            }else{
+                elem.addEventListener('input', (item) => {
+                    item.target.value = item.target.value.replace(/\D/g, '');
+                });
+            }
+            // console.log(elem);
+            
         });
     };
     onlyNumber();

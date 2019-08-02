@@ -278,13 +278,9 @@ window.addEventListener('DOMContentLoaded', function(){
         let inputItems = document.querySelectorAll('.calc-item');
         
         inputItems.forEach((elem) => {
-            if(elem.matches('select')){
-                return;
-            }else{
-                elem.addEventListener('input', (item) => {
-                    item.target.value = item.target.value.replace(/\D/g, '');
-                });
-            }
+            elem.addEventListener('input', (item) => {
+                item.target.value = item.target.value.replace(/\D/g, '');
+            });
         });
     };
     onlyNumber();
@@ -351,4 +347,135 @@ window.addEventListener('DOMContentLoaded', function(){
         });
     };
     changePhoto();
+
+    // только + и числа для полей с номером телефона
+    const onlyNumberPhone = () => {
+        const inputItems = document.querySelectorAll('.form-phone');
+
+        inputItems.forEach((elem) => {
+            elem.addEventListener('input', (item) => {
+                item.target.value = item.target.value.replace(/[^\+\d]/g, '');
+            });
+        });
+    };
+    onlyNumberPhone();
+
+    // Только Кириллица и пробелы для полей "Ваше имя" и "Ваше сообщение"
+    const kirillInput = () => {
+        const inputName = document.querySelectorAll('[name=user_name]'),
+            inputMessage = document.getElementById('form2-message');
+        inputName.forEach((elem) => {
+            elem.addEventListener('input', (item) => {
+                item.target.value = item.target.value.replace(/[-+\/'"№<>_=?!*$.,0-9a-zA-Z]/g, '');
+            });
+        });
+        inputMessage.addEventListener('input', (item) => {
+            item.target.value = item.target.value.replace(/[-+\/'"№<>_=?!*$.,0-9a-zA-Z]/g, '');
+        });
+        
+    };
+    kirillInput();
+
+    //send-ajax-form
+    const sendForm = () => {
+        const errorMessage = 'Что то пошло не так...',
+            loadMessage = 'Загрузка...',
+            successMessage = 'Спасибо! Мы скоро с вами свяжемся';
+
+        const form = document.getElementById('form1'),
+            formFooter = document.getElementById('form2'),
+            formPopUp = document.getElementById('form3');
+
+        const statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 2rem';
+        
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(form);
+            let body = {};
+
+            formData.forEach((val, key) => {
+                body[key] = val;
+            }); 
+            postData(body, () => {
+                form.querySelectorAll('input').forEach( item => item.value ='');
+                statusMessage.textContent = successMessage;
+
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+
+
+        });
+
+        formFooter.addEventListener('submit', (event) => {
+            event.preventDefault();
+            formFooter.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(formFooter);
+            let body = {};
+
+            formData.forEach((val, key) => {
+                body[key] = val;
+            }); 
+            postData(body, () => {
+                formFooter.querySelectorAll('input').forEach( item => item.value ='');
+                statusMessage.textContent = successMessage;
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+        });
+
+        formPopUp.addEventListener('submit', (event) => {
+            event.preventDefault();
+            formPopUp.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            statusMessage.style.cssText = 'font-size: 2rem; color: #ffffff';
+            const formData = new FormData(formPopUp);
+            let body = {};
+
+            formData.forEach((val, key) => {
+                body[key] = val;
+            }); 
+            postData(body, () => {
+                formPopUp.querySelectorAll('input').forEach( item => item.value ='');
+                statusMessage.textContent = successMessage;
+
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+        });
+
+        const postData = (body, outputData, errorData) => {
+            return new Promise((resolve, reject) =>{
+                const request = new XMLHttpRequest();
+                request.addEventListener('readystatechange', () => {
+                    
+                    if(request.readyState !== 4){
+                        return;
+                    }
+                    if(request.status === 200){
+                        resolve();
+                        outputData();
+                        
+                    }else{
+                        reject();
+                        errorData(request.status);
+                        
+                    }
+                });
+
+                request.open('POST', './server.php');
+                request.setRequestHeader('Content-Type', 'application/json');
+            
+                request.send(JSON.stringify(body));
+            });    
+        };
+    };
+    sendForm();
 });

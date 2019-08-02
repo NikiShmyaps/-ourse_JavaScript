@@ -399,11 +399,10 @@ window.addEventListener('DOMContentLoaded', function(){
             formData.forEach((val, key) => {
                 body[key] = val;
             }); 
-            postData(body, () => {
-                form.querySelectorAll('input').forEach( item => item.value ='');
+            postData(body).then(() =>{
+                formPopUp.querySelectorAll('input').forEach( item => item.value ='');
                 statusMessage.textContent = successMessage;
-
-            }, (error) => {
+            }).catch((error) =>{
                 statusMessage.textContent = errorMessage;
                 console.error(error);
             });
@@ -421,10 +420,10 @@ window.addEventListener('DOMContentLoaded', function(){
             formData.forEach((val, key) => {
                 body[key] = val;
             }); 
-            postData(body, () => {
-                formFooter.querySelectorAll('input').forEach( item => item.value ='');
+            postData(body).then(() =>{
+                formPopUp.querySelectorAll('input').forEach( item => item.value ='');
                 statusMessage.textContent = successMessage;
-            }, (error) => {
+            }).catch((error) =>{
                 statusMessage.textContent = errorMessage;
                 console.error(error);
             });
@@ -440,18 +439,17 @@ window.addEventListener('DOMContentLoaded', function(){
 
             formData.forEach((val, key) => {
                 body[key] = val;
-            }); 
-            postData(body, () => {
+            });
+            postData(body).then(() =>{
                 formPopUp.querySelectorAll('input').forEach( item => item.value ='');
                 statusMessage.textContent = successMessage;
-
-            }, (error) => {
+            }).catch((error) =>{
                 statusMessage.textContent = errorMessage;
                 console.error(error);
             });
         });
 
-        const postData = (body, outputData, errorData) => {
+        const postData = (body) => {
             return new Promise((resolve, reject) =>{
                 const request = new XMLHttpRequest();
                 request.addEventListener('readystatechange', () => {
@@ -461,11 +459,9 @@ window.addEventListener('DOMContentLoaded', function(){
                     }
                     if(request.status === 200){
                         resolve();
-                        outputData();
                         
                     }else{
-                        reject();
-                        errorData(request.status);
+                        reject(request.status);
                         
                     }
                 });

@@ -4,7 +4,7 @@ import '@babel/polyfill';
 import 'nodelist-foreach-polyfill';
 import 'formdata-polyfill';
 import elementClosest from 'element-closest';
-elementClosest(window);
+elementClosest(window); 
 
 import countTimer from './modules/countTimer';
 import toggleMenu from './modules/toggleMenu';

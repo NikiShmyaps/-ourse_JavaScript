@@ -3,7 +3,7 @@ function clubSelect(){
         body = document.querySelector('body');
 
     const selectActive = () => {
-        choose.classList.toggle('active-select');
+        choose.classList.toggle('active');
     };
 
     body.addEventListener('click', (event) => {
@@ -13,7 +13,7 @@ function clubSelect(){
             selectActive();
             return;
         }
-        choose.classList.remove('active-select');
+        choose.classList.remove('active');
         return;
     });
 }

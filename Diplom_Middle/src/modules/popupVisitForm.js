@@ -1,4 +1,4 @@
-function popupVisitForm(){
+const popupVisitForm = () => {
     const openPopup = document.querySelector('.open-popup'),
         freeVisitForm = document.querySelector('#free_visit_form'),
         body = document.querySelector('body');
@@ -26,6 +26,6 @@ function popupVisitForm(){
             return;
         }
     });
-}
+};
 
 export default popupVisitForm;

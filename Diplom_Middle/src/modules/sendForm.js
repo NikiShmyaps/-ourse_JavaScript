@@ -1,97 +1,66 @@
-function sendForm() {
+const sendForm = () => {
     const errorMessage = 'Что то пошло не так...',
         loadMessage = 'Пожалуйста подождите, идет загрузка',
-        successMessage = 'Спасибо! Мы скоро с вами свяжемся';
+        successMessage = 'Спасибо! Мы скоро с вами свяжемся',
+        consentMessage = 'Пожалуйста подтвердите согласие на обработку персональных данных',
+        contentClear = '';
 
-    const formOne = document.getElementById('form1'),
-        formTwo = document.getElementById('form2'),
-        formBanner = document.getElementById('banner-form'),
-        formCardOrder = document.getElementById('card_order'),
-        formFooter = document.getElementById('footer_form');
+    const formCardOrder = document.getElementById('card_order'),
+        formFooter = document.getElementById('footer_form'),
+        thanks = document.getElementById('thanks');
 
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = 'font-size: 1.5rem;';
 
-    formOne.addEventListener('submit', (event) => {
-        event.preventDefault();
-        formOne.appendChild(statusMessage);
-        statusMessage.textContent = loadMessage;
-        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px';
-        const formData = new FormData(formOne);
-        let body = {};
+    let getForm = (formID, formBTN, checkID) => {
+        const form = document.getElementById(formID),
+            fromBtn = document.querySelector(formBTN),
+            check = document.getElementById(checkID);
 
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-
-        postData(body).then((response) => {
-            if(response.status !== 200){
-                throw new Error('status network not 200');
+            fromBtn.addEventListener('click', () => {
+            if(check.checked){
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    form.appendChild(statusMessage);
+                    statusMessage.textContent = loadMessage;
+                    statusMessage.style.cssText = 'color: #ffffff;  margin-top: 10px';
+        
+                    const formData = new FormData(form);
+        
+                    let body = {},
+                        item;
+                    
+                    formData.forEach((val, key) => {
+                        body[key] = val;
+                        item = document.querySelector(`#${formID} input[name=${key}]`);
+                    });
+        
+                    postData(item, body).then((response) => {
+                        if(response.status !== 200){
+                            throw new Error('status network not 200');
+                        }
+                        thanks.style.display = 'block';
+                        statusMessage.textContent = contentClear;
+                        form.querySelectorAll('input').forEach( item => item.value ='');
+                    }).catch((error) => {
+                        form.querySelectorAll('input').forEach( item => item.value ='');
+                        statusMessage.textContent = errorMessage;
+                        console.error(error);
+                    });
+                });
+            }else{
+                form.appendChild(statusMessage);
+                statusMessage.textContent = consentMessage;
+                statusMessage.style.cssText = 'color: #ffffff;  margin-top: 5px';
             }
-            statusMessage.textContent = successMessage;
-            formOne.querySelectorAll('input').forEach( item => item.value ='');
-        }).catch((error) => {
-            formOne.querySelectorAll('input').forEach( item => item.value ='');
-            statusMessage.textContent = errorMessage;
-            console.error(error);
         });
-    });
-
-    formTwo.addEventListener('submit', (event) => {
-        event.preventDefault();
-        formTwo.appendChild(statusMessage);
-        statusMessage.textContent = loadMessage;
-        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px';
-        const formData = new FormData(formTwo);
-        let body = {};
-
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-
-        postData(body).then((response) => {
-            if(response.status !== 200){
-                throw new Error('status network not 200');
-            }
-            statusMessage.textContent = successMessage;
-            formTwo.querySelectorAll('input').forEach( item => item.value ='');
-        }).catch((error) => {
-            formTwo.querySelectorAll('input').forEach( item => item.value ='');
-            statusMessage.textContent = errorMessage;
-            console.error(error);
-        });
-    });
-
-    formBanner.addEventListener('submit', (event) => {
-        event.preventDefault();
-        formBanner.appendChild(statusMessage);
-        statusMessage.textContent = loadMessage;
-        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px';
-        const formData = new FormData(formBanner);
-        let body = {};
-
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-
-        postData(body).then((response) => {
-            if(response.status !== 200){
-                throw new Error('status network not 200');
-            }
-            statusMessage.textContent = successMessage;
-            formBanner.querySelectorAll('input').forEach( item => item.value ='');
-        }).catch((error) => {
-            formBanner.querySelectorAll('input').forEach( item => item.value ='');
-            statusMessage.textContent = errorMessage;
-            console.error(error);
-        });
-    });
+    };
 
     formCardOrder.addEventListener('submit', (event) => {
         event.preventDefault();
         formCardOrder.appendChild(statusMessage);
         statusMessage.textContent = loadMessage;
-        statusMessage.style.cssText = 'margin-top: 15px; text-align: center';
+        statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
         const formData = new FormData(formCardOrder);
         let body = {};
 
@@ -103,10 +72,10 @@ function sendForm() {
             if(response.status !== 200){
                 throw new Error('status network not 200');
             }
-            statusMessage.textContent = successMessage;
+            thanks.style.display = 'block';
+            statusMessage.textContent = contentClear;
             formCardOrder.querySelectorAll('input').forEach( item => item.value ='');
         }).catch((error) => {
-            formCardOrder.querySelectorAll('input').forEach( item => item.value ='');
             statusMessage.textContent = errorMessage;
             console.error(error);
         });
@@ -128,16 +97,16 @@ function sendForm() {
             if(response.status !== 200){
                 throw new Error('status network not 200');
             }
-            statusMessage.textContent = successMessage;
+            thanks.style.display = 'block';
+            statusMessage.textContent = contentClear;
             formFooter.querySelectorAll('input').forEach( item => item.value ='');
         }).catch((error) => {
-            formFooter.querySelectorAll('input').forEach( item => item.value ='');
             statusMessage.textContent = errorMessage;
             console.error(error);
         });
     });
 
-    const postData = (body) => {
+    const postData = (item, body) => {
         return fetch('./server.php', {
             method: 'POST',
             headers: {
@@ -146,6 +115,10 @@ function sendForm() {
             body: JSON.stringify(body)
         });
     };
-}
+
+    getForm('form1', '[name=send1]', 'check');
+    getForm('form2', '[name=send2]', 'check2');
+    getForm('banner-form', '[name=send]', 'check1');
+};
 
 export default sendForm;

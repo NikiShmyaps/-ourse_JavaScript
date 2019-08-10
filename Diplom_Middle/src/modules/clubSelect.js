@@ -1,4 +1,4 @@
-function clubSelect(){
+const clubSelect = () => {
     const choose = document.querySelector('.clubs-list>ul'),
         body = document.querySelector('body');
 
@@ -16,6 +16,6 @@ function clubSelect(){
         choose.classList.remove('active');
         return;
     });
-}
+};
 
 export default clubSelect;

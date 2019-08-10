@@ -7,6 +7,7 @@ import onlyNumberPhone from './modules/onlyNumberPhone';
 import kirillInput from './modules/kirillInput';
 import sendForm from './modules/sendForm';
 import gift from './modules/gift';
+import popupThanks from './modules/popupThanks';
 
 //Кнопка выбрать клуб
 clubSelect();
@@ -28,3 +29,6 @@ sendForm();
 
 //popup подарок
 gift();
+
+//popup блогодарности
+popupThanks();

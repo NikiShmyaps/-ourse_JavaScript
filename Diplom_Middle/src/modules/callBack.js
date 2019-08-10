@@ -1,4 +1,4 @@
-function callBack(){
+const callBack = () => {
     const callbackBtn = document.querySelector('.callback-btn'),
         callbackForm = document.querySelector('#callback_form'),
         body = document.querySelector('body');
@@ -18,6 +18,6 @@ function callBack(){
                 return;
             }
         });
-}
+};
 
 export default callBack;

@@ -1,8 +1,7 @@
-function gift(){
+const gift = () => {
     const fixedGift = document.querySelector('.fixed-gift'),
         gift = document.querySelector('#gift'),
         body = document.querySelector('body');
-        console.log('gift: ', gift);
 
     fixedGift.addEventListener('click', () => {
         gift.style.display = 'block';
@@ -23,6 +22,6 @@ function gift(){
             return;
         }
     });
-}
+};
 
 export default gift;

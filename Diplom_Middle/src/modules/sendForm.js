@@ -5,8 +5,7 @@ const sendForm = () => {
         consentMessage = 'Пожалуйста подтвердите согласие на обработку персональных данных',
         contentClear = '';
 
-    const formCardOrder = document.getElementById('card_order'),
-        formFooter = document.getElementById('footer_form'),
+    const formFooter = document.getElementById('footer_form'),
         thanks = document.getElementById('thanks');
 
     const statusMessage = document.createElement('div');
@@ -17,13 +16,19 @@ const sendForm = () => {
             fromBtn = document.querySelector(formBTN),
             check = document.getElementById(checkID);
 
-            fromBtn.addEventListener('click', () => {
-            if(check.checked){
+            fromBtn.addEventListener('click', (event) => {
+            if(check.checked === true){
                 form.addEventListener('submit', (event) => {
                     event.preventDefault();
-                    form.appendChild(statusMessage);
-                    statusMessage.textContent = loadMessage;
-                    statusMessage.style.cssText = 'color: #ffffff;  margin-top: 10px';
+                    if(form == document.getElementById('card_order')){
+                        form.appendChild(statusMessage);
+                        statusMessage.textContent = loadMessage;
+                        statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 10px; text-align: center';
+                    }else{
+                        form.appendChild(statusMessage);
+                        statusMessage.textContent = loadMessage;
+                        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 10px';
+                    }
         
                     const formData = new FormData(form);
         
@@ -39,47 +44,79 @@ const sendForm = () => {
                         if(response.status !== 200){
                             throw new Error('status network not 200');
                         }
-                        thanks.style.display = 'block';
-                        statusMessage.textContent = contentClear;
+                        if(fromBtn == document.querySelector('[name=send]')){
+                            thanks.style.display = 'block';
+                            statusMessage.textContent = contentClear;
+                        }else if(form == document.getElementById('form1')){
+                            const secretive = document.querySelector('.secretive-one');
+                            secretive.style.display = 'none';
+                            statusMessage.textContent = successMessage;
+                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                            setTimeout(() => {
+                                secretive.style.display = 'block';
+                                statusMessage.textContent = contentClear;
+                            }, 2500);
+                        }else if (form == document.getElementById('form2')){
+                            const secretive = document.querySelector('.secretive-two');
+                            secretive.style.display = 'none';
+                            statusMessage.textContent = successMessage;
+                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                            setTimeout(() => {
+                                secretive.style.display = 'block';
+                                statusMessage.textContent = contentClear;
+                            }, 2500);
+                        }else if (form == document.getElementById('card_order')){
+                            statusMessage.textContent = successMessage;
+                            statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
+                            setTimeout(() => {
+                                statusMessage.textContent = contentClear;
+                            }, 2500);
+                        }
+                                                
                         form.querySelectorAll('input').forEach( item => item.value ='');
                     }).catch((error) => {
-                        form.querySelectorAll('input').forEach( item => item.value ='');
+                        if(form == document.getElementById('form1')){
+                            const secretive = document.querySelector('.secretive-one');
+                            secretive.style.display = 'none';
+                            statusMessage.textContent = errorMessage;
+                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                            setTimeout(() => {
+                                secretive.style.display = 'block';
+                                statusMessage.textContent = contentClear;
+                            }, 2500);
+                        }else if (form == document.getElementById('form2')){
+                            const secretive = document.querySelector('.secretive-two');
+                            secretive.style.display = 'none';
+                            statusMessage.textContent = errorMessage;
+                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                            console.error(error);
+                            setTimeout(() => {
+                                secretive.style.display = 'block';
+                                statusMessage.textContent = contentClear;
+                            }, 2500);
+                        }else if(form == document.getElementById('card_order')){
+                            statusMessage.textContent = errorMessage;
+                            console.error(error);
+                            statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
+                        }
                         statusMessage.textContent = errorMessage;
                         console.error(error);
                     });
                 });
             }else{
-                form.appendChild(statusMessage);
-                statusMessage.textContent = consentMessage;
-                statusMessage.style.cssText = 'color: #ffffff;  margin-top: 5px';
+                event.preventDefault();
+                if(form == document.getElementById('card_order')){
+                    form.appendChild(statusMessage);
+                    statusMessage.textContent = consentMessage;
+                    statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 5px; text-align: center';
+                }else{
+                    form.appendChild(statusMessage);
+                    statusMessage.textContent = consentMessage;
+                    statusMessage.style.cssText = 'color: #ffffff;  margin-top: 5px';
+                }
             }
         });
     };
-
-    formCardOrder.addEventListener('submit', (event) => {
-        event.preventDefault();
-        formCardOrder.appendChild(statusMessage);
-        statusMessage.textContent = loadMessage;
-        statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
-        const formData = new FormData(formCardOrder);
-        let body = {};
-
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-
-        postData(body).then((response) => {
-            if(response.status !== 200){
-                throw new Error('status network not 200');
-            }
-            thanks.style.display = 'block';
-            statusMessage.textContent = contentClear;
-            formCardOrder.querySelectorAll('input').forEach( item => item.value ='');
-        }).catch((error) => {
-            statusMessage.textContent = errorMessage;
-            console.error(error);
-        });
-    });
 
     formFooter.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -87,18 +124,23 @@ const sendForm = () => {
         statusMessage.textContent = loadMessage;
         statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px; text-align: center';
         const formData = new FormData(formFooter);
-        let body = {};
+        
+        let body = {},
+            item;
 
         formData.forEach((val, key) => {
             body[key] = val;
+            item = document.querySelector(`#${'footer_form'} input[name=${key}]`);
         });
 
-        postData(body).then((response) => {
+        postData(item, body).then((response) => {
             if(response.status !== 200){
                 throw new Error('status network not 200');
             }
-            thanks.style.display = 'block';
-            statusMessage.textContent = contentClear;
+            statusMessage.textContent = successMessage;
+            setTimeout(() => {
+                statusMessage.textContent = contentClear;
+            }, 2500);
             formFooter.querySelectorAll('input').forEach( item => item.value ='');
         }).catch((error) => {
             statusMessage.textContent = errorMessage;
@@ -119,6 +161,7 @@ const sendForm = () => {
     getForm('form1', '[name=send1]', 'check');
     getForm('form2', '[name=send2]', 'check2');
     getForm('banner-form', '[name=send]', 'check1');
+    getForm('card_order', '[name=send3]', 'card_check');
 };
 
 export default sendForm;

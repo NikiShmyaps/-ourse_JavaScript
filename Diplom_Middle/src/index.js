@@ -8,6 +8,7 @@ import kirillInput from './modules/kirillInput';
 import sendForm from './modules/sendForm';
 import gift from './modules/gift';
 import popupThanks from './modules/popupThanks';
+import mainSlider from './modules/mainSlider';
 
 //Кнопка выбрать клуб
 clubSelect();
@@ -32,3 +33,6 @@ gift();
 
 //popup блогодарности
 popupThanks();
+
+//главный слайдер
+mainSlider();

@@ -137,12 +137,16 @@ const sendForm = () => {
             if(response.status !== 200){
                 throw new Error('status network not 200');
             }
-            statusMessage.textContent = successMessage;
-            setTimeout(() => {
-                statusMessage.textContent = contentClear;
-            }, 2500);
+            thanks.style.display = 'block';
+            statusMessage.textContent = contentClear;
             formFooter.querySelectorAll('input').forEach( item => item.value ='');
         }).catch((error) => {
+            const secretive = document.querySelector('.secretive-footer'),
+                show = document.querySelector('.show');
+            
+            thanks.style.display = 'block';
+            secretive.style.display = 'none';
+            show.appendChild(statusMessage);
             statusMessage.textContent = errorMessage;
             console.error(error);
         });

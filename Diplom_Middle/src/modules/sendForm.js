@@ -6,6 +6,7 @@ const sendForm = () => {
         contentClear = '';
 
     const formFooter = document.getElementById('footer_form'),
+        formCardOrder = document.querySelector('.club-card_order'),
         thanks = document.getElementById('thanks');
 
     const statusMessage = document.createElement('div');

@@ -9,6 +9,7 @@ import sendForm from './modules/sendForm';
 import gift from './modules/gift';
 import popupThanks from './modules/popupThanks';
 import mainSlider from './modules/mainSlider';
+import calculator from './modules/calculator';
 
 //Кнопка выбрать клуб
 clubSelect();
@@ -28,11 +29,14 @@ kirillInput();
 // Отправка формы
 sendForm();
 
-//popup подарок
+// popup подарок
 gift();
 
-//popup блогодарности
+// popup блогодарности
 popupThanks();
 
-//главный слайдер
+// Главный слайдер
 mainSlider();
+
+// Калькулятор
+calculator();

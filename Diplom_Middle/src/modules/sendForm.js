@@ -73,8 +73,11 @@ const sendForm = () => {
                                 statusMessage.textContent = contentClear;
                             }, 2500);
                         }
-                                                
-                        form.querySelectorAll('input').forEach( item => item.value ='');
+                        form.querySelectorAll('input').forEach( item => {
+                            if (item.getAttribute("name") == 'name' || item.getAttribute("name") == 'phone') {
+                                item.value = '';
+                            }
+                        });
                     }).catch((error) => {
                         if(form == document.getElementById('form1')){
                             const secretive = document.querySelector('.secretive-one');

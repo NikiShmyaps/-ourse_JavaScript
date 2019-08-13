@@ -10,6 +10,7 @@ import gift from './modules/gift';
 import popupThanks from './modules/popupThanks';
 import mainSlider from './modules/mainSlider';
 import calculator from './modules/calculator';
+import gallerySlider from './modules/gallerySlider';
 
 //Кнопка выбрать клуб
 clubSelect();
@@ -40,3 +41,6 @@ mainSlider();
 
 // Калькулятор
 calculator();
+
+// Слайдер фотогалереи
+gallerySlider();

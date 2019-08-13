@@ -18,3 +18,35 @@
     cursor: pointer;
     margin-right: 15px;
 }
+
+
+.gallery-slide-active {
+    display: block !important;
+}
+
+
+
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: #ffd11a;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .slider-btn.prev {
+    left: 0;
+    background-image: url("../images/arrow-left.png");
+  }
+  
+  .slider-btn.next {
+    right: 0;
+    background-image: url("../images/arrow-right.png");
+  }

@@ -2,3 +2,19 @@
     display: block !important;
 }
 
+.slide-active{
+    display: flex !important;
+}
+
+.dot-active {
+    background-color: #ffd11a !important;
+}
+
+.main-dot {
+    height: 3px;
+    width: 35px;
+    display: block;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: 15px;
+}

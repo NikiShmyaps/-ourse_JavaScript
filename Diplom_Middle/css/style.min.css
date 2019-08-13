@@ -1307,7 +1307,7 @@ nav.popup-menu .close-menu-btn img {
     display: -o-flex;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: none;
     height: 100%;
 }
 

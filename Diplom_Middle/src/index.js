@@ -11,6 +11,7 @@ import popupThanks from './modules/popupThanks';
 import mainSlider from './modules/mainSlider';
 import calculator from './modules/calculator';
 import gallerySlider from './modules/gallerySlider';
+import serviceSlider from './modules/serviceSlider';
 
 //Кнопка выбрать клуб
 clubSelect();
@@ -44,3 +45,6 @@ calculator();
 
 // Слайдер фотогалереи
 gallerySlider();
+
+// Слайдер сервиса
+serviceSlider();

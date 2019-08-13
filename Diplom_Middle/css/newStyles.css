@@ -24,8 +24,24 @@
     display: block !important;
 }
 
+.services-slider-active{
+    display: block !important;
+}
 
 
+.services-slider .slider-btn {
+    position: absolute;
+    top: 30%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    height: 35px;
+    width: 35px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: #ffd11a;
+    border-radius: 50%;
+    cursor: pointer;
+}
 
 .slider-btn {
     position: absolute;
@@ -49,4 +65,11 @@
   .slider-btn.next {
     right: 0;
     background-image: url("../images/arrow-right.png");
+  }
+
+
+  .slider-block {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }

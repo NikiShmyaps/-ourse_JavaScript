@@ -1539,6 +1539,7 @@ nav.popup-menu .close-menu-btn img {
 }
 
 .services-slider {
+    position: relative;
     display: flex;
     margin: 0 auto;
     padding-left: 15px;
@@ -1550,6 +1551,7 @@ nav.popup-menu .close-menu-btn img {
     margin-right: 6px;
     margin-left: 6px;
     width: 210px;
+    display: none;
 }
 
 .services-slider .slide img {

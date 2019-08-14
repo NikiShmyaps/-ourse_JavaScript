@@ -1,7 +1,8 @@
 const calculator = () => {
-    const cardOrder = document.getElementById(`card_order`),
-        cardLetoMozaika = document.getElementById(`card_leto_mozaika`),
-        priceTotal = document.getElementById(`price-total`);
+    const cardOrder = document.getElementById('card_order'),
+        cardLetoMozaika = document.getElementById('card_leto_mozaika'),
+        priceTotal = document.getElementById('price-total'),
+        priceInput = document.querySelector('.price input');
 
 
     cardOrder.addEventListener(`change`, (event) => {
@@ -31,6 +32,10 @@ const calculator = () => {
                     total = 24900;
                 }
             }
+
+            if (priceInput.value === `ТЕЛО2019`) {
+                total = total - (total * 0.3);
+              }
 
             priceTotal.textContent = total;
         }

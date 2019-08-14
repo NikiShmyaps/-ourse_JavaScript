@@ -1,5 +1,10 @@
 'use strict';
 
+import "@babel/polyfill";
+import 'nodelist-foreach-polyfill';
+import elementClosest from 'element-closest';
+elementClosest(window);
+
 import clubSelect from './modules/clubSelect';
 import popupVisitForm from './modules/popupVisitForm';
 import callBack from './modules/callBack';

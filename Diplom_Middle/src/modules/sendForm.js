@@ -17,98 +17,95 @@ const sendForm = () => {
             fromBtn = document.querySelector(formBTN),
             check = document.getElementById(checkID);
 
-            fromBtn.addEventListener('click', (event) => {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
             if(check.checked === true){
-                form.addEventListener('submit', (event) => {
-                    event.preventDefault();
-                    if(form == document.getElementById('card_order')){
-                        form.appendChild(statusMessage);
-                        statusMessage.textContent = loadMessage;
-                        statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 10px; text-align: center';
-                    }else{
-                        form.appendChild(statusMessage);
-                        statusMessage.textContent = loadMessage;
-                        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 10px';
-                    }
+                if(form == document.getElementById('card_order')){
+                    form.appendChild(statusMessage);
+                    statusMessage.textContent = loadMessage;
+                    statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 10px; text-align: center';
+                }else{
+                    form.appendChild(statusMessage);
+                    statusMessage.textContent = loadMessage;
+                    statusMessage.style.cssText = 'color: #ffffff;  margin-top: 10px';
+                }
         
-                    const formData = new FormData(form);
+                const formData = new FormData(form);
         
-                    let body = {},
-                        item;
+                let body = {},
+                    item;
                     
-                    formData.forEach((val, key) => {
-                        body[key] = val;
-                        item = document.querySelector(`#${formID} input[name=${key}]`);
-                    });
+                formData.forEach((val, key) => {
+                    body[key] = val;
+                    item = document.querySelector(`#${formID} input[name=${key}]`);
+                });
         
-                    postData(item, body).then((response) => {
-                        if(response.status !== 200){
-                            throw new Error('status network not 200');
-                        }
-                        if(fromBtn == document.querySelector('[name=send]')){
-                            thanks.style.display = 'block';
+                postData(item, body).then((response) => {
+                    if(response.status !== 200){
+                        throw new Error('status network not 200');
+                    }
+                    if(fromBtn == document.querySelector('[name=send]')){
+                        thanks.style.display = 'block';
+                        statusMessage.textContent = contentClear;
+                    }else if(form == document.getElementById('form1')){
+                        const secretive = document.querySelector('.secretive-one');
+                        secretive.style.display = 'none';
+                        statusMessage.textContent = successMessage;
+                        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                        setTimeout(() => {
+                            secretive.style.display = 'block';
                             statusMessage.textContent = contentClear;
-                        }else if(form == document.getElementById('form1')){
-                            const secretive = document.querySelector('.secretive-one');
-                            secretive.style.display = 'none';
-                            statusMessage.textContent = successMessage;
-                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
-                            setTimeout(() => {
-                                secretive.style.display = 'block';
-                                statusMessage.textContent = contentClear;
-                            }, 2500);
-                        }else if (form == document.getElementById('form2')){
-                            const secretive = document.querySelector('.secretive-two');
-                            secretive.style.display = 'none';
-                            statusMessage.textContent = successMessage;
-                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
-                            setTimeout(() => {
-                                secretive.style.display = 'block';
-                                statusMessage.textContent = contentClear;
-                            }, 2500);
-                        }else if (form == document.getElementById('card_order')){
-                            statusMessage.textContent = successMessage;
-                            statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
-                            setTimeout(() => {
-                                statusMessage.textContent = contentClear;
-                            }, 2500);
+                           }, 2500);
+                    }else if (form == document.getElementById('form2')){
+                        const secretive = document.querySelector('.secretive-two');
+                        secretive.style.display = 'none';
+                        statusMessage.textContent = successMessage;
+                        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                        setTimeout(() => {
+                            secretive.style.display = 'block';
+                            statusMessage.textContent = contentClear;
+                        }, 2500);
+                    }else if (form == document.getElementById('card_order')){
+                        statusMessage.textContent = successMessage;
+                        statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
+                        setTimeout(() => {
+                            statusMessage.textContent = contentClear;
+                        }, 2500);
+                    }
+                    form.querySelectorAll('input').forEach( item => {
+                        if (item.getAttribute("name") == 'name' || item.getAttribute("name") == 'phone') {
+                            item.value = '';
                         }
-                        form.querySelectorAll('input').forEach( item => {
-                            if (item.getAttribute("name") == 'name' || item.getAttribute("name") == 'phone') {
-                                item.value = '';
-                            }
-                        });
-                    }).catch((error) => {
-                        if(form == document.getElementById('form1')){
-                            const secretive = document.querySelector('.secretive-one');
-                            secretive.style.display = 'none';
-                            statusMessage.textContent = errorMessage;
-                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
-                            setTimeout(() => {
-                                secretive.style.display = 'block';
-                                statusMessage.textContent = contentClear;
-                            }, 2500);
-                        }else if (form == document.getElementById('form2')){
-                            const secretive = document.querySelector('.secretive-two');
-                            secretive.style.display = 'none';
-                            statusMessage.textContent = errorMessage;
-                            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
-                            console.error(error);
-                            setTimeout(() => {
-                                secretive.style.display = 'block';
-                                statusMessage.textContent = contentClear;
-                            }, 2500);
-                        }else if(form == document.getElementById('card_order')){
-                            statusMessage.textContent = errorMessage;
-                            console.error(error);
-                            statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
-                        }
+                    });
+                }).catch((error) => {
+                    if(form == document.getElementById('form1')){
+                        const secretive = document.querySelector('.secretive-one');
+                        secretive.style.display = 'none';
+                        statusMessage.textContent = errorMessage;
+                        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                        setTimeout(() => {
+                            secretive.style.display = 'block';
+                            statusMessage.textContent = contentClear;
+                        }, 2500);
+                    }else if (form == document.getElementById('form2')){
+                        const secretive = document.querySelector('.secretive-two');
+                        secretive.style.display = 'none';
+                        statusMessage.textContent = errorMessage;
+                        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 150px; font-size: 20px';
+                        console.error(error);
+                        setTimeout(() => {
+                            secretive.style.display = 'block';
+                            statusMessage.textContent = contentClear;
+                        }, 2500);
+                    }else if(form == document.getElementById('card_order')){
                         statusMessage.textContent = errorMessage;
                         console.error(error);
-                    });
+                        statusMessage.style.cssText = 'color: #2e2e2e;  margin-top: 15px; text-align: center';
+                    }
+                    statusMessage.textContent = errorMessage;
+                    console.error(error);
                 });
             }else{
-                event.preventDefault();
                 if(form == document.getElementById('card_order')){
                     form.appendChild(statusMessage);
                     statusMessage.textContent = consentMessage;

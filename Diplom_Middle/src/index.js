@@ -6,9 +6,9 @@ import callBack from './modules/callBack';
 import onlyNumberPhone from './modules/onlyNumberPhone';
 import kirillInput from './modules/kirillInput';
 import sendForm from './modules/sendForm';
-import gift from './modules/gift';
+// import gift from './modules/gift';
 import popupThanks from './modules/popupThanks';
-import mainSlider from './modules/mainSlider';
+// import mainSlider from './modules/mainSlider';
 import calculator from './modules/calculator';
 import gallerySlider from './modules/gallerySlider';
 import serviceSlider from './modules/serviceSlider';
@@ -32,13 +32,13 @@ kirillInput();
 sendForm();
 
 // popup подарок
-gift();
+// gift();
 
 // popup блогодарности
 popupThanks();
 
 // Главный слайдер
-mainSlider();
+// mainSlider();
 
 // Калькулятор
 calculator();

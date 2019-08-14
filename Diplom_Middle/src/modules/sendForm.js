@@ -3,10 +3,12 @@ const sendForm = () => {
         loadMessage = 'Пожалуйста подождите, идет загрузка',
         successMessage = 'Спасибо! Мы скоро с вами свяжемся',
         consentMessage = 'Пожалуйста подтвердите согласие на обработку персональных данных',
+        inputMessage = 'Пожалуйста выбирете один из клубов',
         contentClear = '';
 
     const formFooter = document.getElementById('footer_form'),
-        formCardOrder = document.querySelector('.club-card_order'),
+        checkFooterMozaika = document.getElementById('footer_leto_mozaika'),
+        checkFooterShelkovo = document.getElementById('footer_leto_schelkovo'),
         thanks = document.getElementById('thanks');
 
     const statusMessage = document.createElement('div');
@@ -120,37 +122,46 @@ const sendForm = () => {
     };
 
     formFooter.addEventListener('submit', (event) => {
-        event.preventDefault();
-        formFooter.appendChild(statusMessage);
-        statusMessage.textContent = loadMessage;
-        statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px; text-align: center';
-        const formData = new FormData(formFooter);
         
-        let body = {},
-            item;
-
-        formData.forEach((val, key) => {
-            body[key] = val;
-            item = document.querySelector(`#${'footer_form'} input[name=${key}]`);
-        });
-
-        postData(item, body).then((response) => {
-            if(response.status !== 200){
-                throw new Error('status network not 200');
-            }
-            thanks.style.display = 'block';
-            statusMessage.textContent = contentClear;
-            formFooter.querySelectorAll('input').forEach( item => item.value ='');
-        }).catch((error) => {
-            const secretive = document.querySelector('.secretive-footer'),
-                show = document.querySelector('.show');
+        if(checkFooterMozaika.checked || checkFooterShelkovo.checked){
+            event.preventDefault();
+            formFooter.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px; text-align: center';
+            const formData = new FormData(formFooter);
             
-            thanks.style.display = 'block';
-            secretive.style.display = 'none';
-            show.appendChild(statusMessage);
-            statusMessage.textContent = errorMessage;
-            console.error(error);
-        });
+            let body = {},
+                item;
+    
+            formData.forEach((val, key) => {
+                body[key] = val;
+                item = document.querySelector(`#${'footer_form'} input[name=${key}]`);
+            });
+    
+            postData(item, body).then((response) => {
+                if(response.status !== 200){
+                    throw new Error('status network not 200');
+                }
+                thanks.style.display = 'block';
+                statusMessage.textContent = contentClear;
+                formFooter.querySelectorAll('input').forEach( item => item.value ='');
+            }).catch((error) => {
+                const secretive = document.querySelector('.secretive-footer'),
+                    show = document.querySelector('.show');
+                
+                thanks.style.display = 'block';
+                secretive.style.display = 'none';
+                show.appendChild(statusMessage);
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+        }else {
+            event.preventDefault();
+            formFooter.appendChild(statusMessage);
+            statusMessage.textContent = inputMessage;
+            statusMessage.style.cssText = 'color: #ffffff;  margin-top: 15px; text-align: center';
+        }
+        
     });
 
     const postData = (item, body) => {
